@@ -1,0 +1,20 @@
+- name: configure webserver
+  hosts: all
+  tasks:
+  - name: install package
+    yum:
+     name: httpd
+     state: present 
+  - name: copy website
+    copy:
+     content: "Hello World"
+     dest: /var/www/html/index.html
+  - name: restart service
+    service:
+      name: httpd
+      state: restarted
+      enabled: true
+  - name: create user
+    user:
+     name: ugh
+     state: present
